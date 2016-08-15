@@ -11,14 +11,12 @@
 html, body {
   height: 100%;
 }
-
 body {
   overflow: hidden;
   margin: 2;
   perspective: 10000em;
   animation: view 2s ease-in infinite alternate;
 }
-
 .cube {
   transform-style: preserve-3d;
   transform: rotateX(-35deg) rotateY(65deg);
@@ -29,7 +27,6 @@ body {
   top: 50%;
   left: 50%;
 }
-
 .face {
   margin: -5em;
   border: solid .25em;
@@ -60,9 +57,7 @@ body {
   transform: rotateX(90deg) translateZ(-5em);
   background: rgba(178, 178, 178, 0.75);
 }
-
 }
-
 </style>
    
 </head>
@@ -118,6 +113,13 @@ var mousedown_fcuntion = function(e)
 	startX = e.clientX;
 	startY = e.clientY;
 }
+var touchstart_fcuntion = function(e)
+{
+	console.log("touch down");
+	downFlag = true;
+	startX = e.touches[0].clientX;
+	startY = e.touches[0].clientY;
+}
 var mousemove_fcuntion = function(e)
 {	
 	if (downFlag)
@@ -126,6 +128,28 @@ var mousemove_fcuntion = function(e)
 		document.e = e;
 		deltaX =  e.clientX - startX;
 		deltaY =  e.clientY - startY;
+		deltaX = deltaX /3;
+		deltaY = deltaY /3;			
+		tempX 	= RotateX - deltaY;
+		tempX = tempX % 360;
+		if (tempX>90  && tempX<270)
+			{
+				tempY	= RotateY - deltaX;}
+		else{
+				tempY	= RotateY + deltaX;}		
+		tempY = tempY % 360;
+		console.log(tempX.toString() + '  ' + tempY.toString());
+		cube.style.transform="rotateX(" + tempX.toString() + "deg) rotateY(" + tempY.toString() + "deg)";
+	}
+}
+var touchmove_fcuntion = function(e)
+{	
+	if (downFlag)
+	{
+		console.log("touch move");
+		document.e = e;
+		deltaX =  e.touches[0].clientX - startX;
+		deltaY =  e.touches[0].clientY - startY;
 		deltaX = deltaX /3;
 		deltaY = deltaY /3;			
 		tempX 	= RotateX - deltaY;
@@ -150,7 +174,9 @@ var mouseup_fcuntion = function(e)
 document.addEventListener("mousedown",mousedown_fcuntion,false);
 document.addEventListener("mousemove",mousemove_fcuntion,false);
 document.addEventListener("mouseup",mouseup_fcuntion,false);
-
+document.addEventListener("touchstart",touchstart_fcuntion,false);
+document.addEventListener("touchmove",touchmove_fcuntion,false);
+document.addEventListener("touchend",mouseup_fcuntion,false);
 init();	
 </script>
 </html>
