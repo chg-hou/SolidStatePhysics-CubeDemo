@@ -186,7 +186,7 @@ var isIE = function(){
     b.innerHTML = '<!--[if IE]><i></i><![endif]-->'
     return b.getElementsByTagName('i').length === 1
 };
-var alertIE = function(ver){
+var alertIE = function(){
     if isIE()
     {
     	alert('Internet Explorer is not supported! Please use Chrome or Firefox.')
