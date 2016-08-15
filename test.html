@@ -181,17 +181,17 @@ init();
 </script>
 
 <script>
-var isIE = function(ver){
+var isIE = function(){
     var b = document.createElement('b')
-    b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
+    b.innerHTML = '<!--[if IE]><i></i><![endif]-->'
     return b.getElementsByTagName('i').length === 1
-}
+};
 var alertIE = function(ver){
     if isIE()
     {
     	alert('Internet Explorer is not supported! Please use Chrome or Firefox.')
     }
-}
+};
 alertIE();
 </script>
 
