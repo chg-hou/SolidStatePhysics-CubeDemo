@@ -113,9 +113,9 @@ var mousedown_fcuntion = function(e)
 	startX = e.clientX;
 	startY = e.clientY;
 }
-var touchstart = function(e)
+var touchstart_fcuntion = function(e)
 {
-	console.log("down");
+	console.log("touch down");
 	downFlag = true;
 	startX = e.touches[0].clientX;
 	startY = e.touches[0].clientY;
@@ -146,7 +146,7 @@ var touchmove_fcuntion = function(e)
 {	
 	if (downFlag)
 	{
-		console.log("move");
+		console.log("touch move");
 		document.e = e;
 		deltaX =  e.touches[0].clientX - startX;
 		deltaY =  e.touches[0].clientY - startY;
