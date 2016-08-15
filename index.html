@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>3D Cube demo</title>
+
+    <style>
+html, body {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  margin: 2;
+  perspective: 10000em;
+  animation: view 2s ease-in infinite alternate;
+}
+
+.cube {
+  transform-style: preserve-3d;
+  transform: rotateX(-35deg) rotateY(65deg);
+}
+.cube, .cube * {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.face {
+  margin: -5em;
+  border: solid .25em;
+  width: 10em;
+  height: 10em;
+}
+.face:nth-child(1) {
+  transform: rotateY(0deg) translateZ(5em);
+  background: rgba(255, 102, 102, 0.7);
+}
+.face:nth-child(2) {
+  transform: rotateY(90deg) translateZ(5em);
+  background: rgba(179, 255, 102, 0.7);
+}
+.face:nth-child(3) {
+  transform: rotateY(180deg) translateZ(5em);
+  background: rgba(102, 255, 255, 0.7);
+}
+.face:nth-child(4) {
+  transform: rotateY(270deg) translateZ(5em);
+  background: rgba(178, 102, 255, 0.7);
+}
+.face:nth-child(5) {
+  transform: rotateX(90deg) translateZ(5em);
+  background: rgba(178, 102, 102, 0.7);
+}
+.face:nth-child(6) {
+  transform: rotateX(90deg) translateZ(-5em);
+  background: rgba(178, 178, 178, 0.75);
+}
+
+}
+
+</style>
+   
+</head>
+
+<body>
+<div>
+<p>
+(a) 3 planes of symmetry parallel to the faces.
+<p>
+(b) 6 diagonal planes of symmetry.
+<p>
+(c) 3 tetrad axes.
+<p>
+(d) 4 triad axes.
+<p>
+(e) 6 diad axes.
+<p>
+</div>
+  <div class='cube' id='cube'>
+  <div class='face'></div>
+  <div class='face'></div>
+  <div class='face'></div>
+  <div class='face'></div>
+  <div class='face'></div>
+  <div class='face'></div>
+
+
+</body>
+<script>
+var init = function()
+{
+	RotateX = 3;
+	RotateY = 45;
+	downFlag = false;
+}
+var mousedown_fcuntion = function(e)
+{
+	console.log("down");
+	downFlag = true;
+	startX = e.clientX;
+	startY = e.clientY;
+}
+var mousemove_fcuntion = function(e)
+{	
+	if (downFlag)
+	{
+		console.log("move");
+		document.e = e;
+		deltaX =  e.clientX - startX;
+		deltaY =  e.clientY - startY;
+		deltaX = deltaX /3;
+		deltaY = deltaY /3;			
+		tempX 	= RotateX - deltaY;
+		tempX = tempX % 360;
+		if (tempX>90  && tempX<270)
+			{
+				tempY	= RotateY - deltaX;}
+		else{
+				tempY	= RotateY + deltaX;}		
+		tempY = tempY % 360;
+		console.log(tempX.toString() + '  ' + tempY.toString());
+		cube.style.transform="rotateX(" + tempX.toString() + "deg) rotateY(" + tempY.toString() + "deg)";
+	}
+}
+var mouseup_fcuntion = function(e)
+{	
+	console.log("up");
+	downFlag = false;
+	RotateX = tempX;
+	RotateY = tempY;
+}
+document.addEventListener("mousedown",mousedown_fcuntion,false);
+document.addEventListener("mousemove",mousemove_fcuntion,false);
+document.addEventListener("mouseup",mouseup_fcuntion,false);
+
+init();	
+</script>>
+</html>
