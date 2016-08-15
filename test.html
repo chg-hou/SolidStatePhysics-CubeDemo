@@ -181,16 +181,16 @@ init();
 </script>
 
 <script>
-var isIE = function(){
-    var b = document.createElement('b')
-    b.innerHTML = '<!--[if IE]><i></i><![endif]-->'
-    return b.getElementsByTagName('i').length === 1
-};
+
 var alertIE = function(){
-    if(isIE())
-    {
-    	alert('Internet Explorer is not supported! Please use Chrome or Firefox.')
-    }
+	var ua = navigator.userAgent.toLowerCase();
+	var s;
+	(s = ua.match(/rv:([\d.]+)\) like gecko/)) ? isie = s[1] :
+	(s = ua.match(/msie ([\d.]+)/)) ? isie = s[1] : 0;
+	if (isie) 
+	{
+		alert('Internet Explorer is not supported! Please use Chrome or Firefox.');
+	}
 };
 alertIE();
 </script>
